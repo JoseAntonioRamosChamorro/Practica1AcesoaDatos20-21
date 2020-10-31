@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 
+
 public class ListaDeLaCompra implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -29,51 +30,53 @@ public class ListaDeLaCompra implements Serializable{
 		NombreLista = nombreLista;
 	}
 	/*
-	  */
+	 */
 	public void agregarProductoAComprar(ArticuloAComprar articulo) {
 		ListaCompra.add(articulo);
 
 	}
 	/*
-	  */
+	 */
 	public void eliminarArticulo (String descripcionArticulo){
 		for (int i = 0; i < ListaCompra.size(); i++) {
 			eliminarIgual(descripcionArticulo,ListaCompra.get(i));
 		}
 	}
-	
+
 	private void eliminarIgual(String descripcionArticulo, ArticuloAComprar articuloAComprar) {
 		if (articuloAComprar.getDescripcion().equals(descripcionArticulo)) {
 			ListaCompra.remove(articuloAComprar);
 		}
 
 	}
-	
-	 
+
+
 	public ArrayList<ArticuloAComprar> getArticulos(){
 		return ListaCompra;
 	}
 	public void almacenarListaCompra() {
 		try {
-		File archivoAlmacenar = new File(".\\"+NombreLista+".dat");
-		FileOutputStream fos = new FileOutputStream(archivoAlmacenar);
-		ObjectOutputStream salida = new ObjectOutputStream(fos);	
-		
-		salida.writeObject(this);
-		salida.close();
-		fos.close();
+			File archivoAlmacenar = new File(".\\"+NombreLista+".txt");
+			FileOutputStream fos = new FileOutputStream(archivoAlmacenar);
+			ObjectOutputStream salida = new ObjectOutputStream(fos);	
+
+			salida.writeObject(this);
+			salida.close();
+			fos.close();
+
+
 		}catch (Exception e) {
 			e.getStackTrace();
 			e.getMessage();
 			System.out.println("Error de escritura");
 		}
-		
+
 	}
-	
+
 	public static ListaDeLaCompra recuperarListaCompra(String archivo) {
 		ListaDeLaCompra listaRecuperada = new ListaDeLaCompra(archivo);
 		try {
-			File archivoRecuperar = new File(".\\"+archivo+".dat");
+			File archivoRecuperar = new File(".\\"+archivo+".txt");
 			FileInputStream fis = new FileInputStream(archivoRecuperar);
 			ObjectInputStream entrada = new ObjectInputStream(fis);	
 
@@ -81,12 +84,12 @@ public class ListaDeLaCompra implements Serializable{
 			System.out.println("Recuperado "+archivo);
 			entrada.close();
 			fis.close();
-			}catch (Exception e) {
-				e.getStackTrace();
-				e.getMessage();
-				System.out.println("Error de recuperación");
-			}
+		}catch (Exception e) {
+			e.getStackTrace();
+			e.getMessage();
+			System.out.println("Error de recuperación");
+		}
 		return listaRecuperada;
-	 }
+	}
 
 }

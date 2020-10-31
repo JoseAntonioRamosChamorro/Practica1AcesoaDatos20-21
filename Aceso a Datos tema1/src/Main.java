@@ -38,9 +38,10 @@ public class Main {
 		}
 		System.out.println();
 		lista1.almacenarListaCompra();
-		ListaDeLaCompra.recuperarListaCompra("Mercadona");
+		
 
 		lista2.almacenarListaCompra();
+		ListaDeLaCompra.recuperarListaCompra("Mercadona");
 		ListaDeLaCompra.recuperarListaCompra("Lidl");
 	}
 }
